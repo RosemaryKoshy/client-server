@@ -15,12 +15,13 @@ while True:
     try:
         message = connectionSocket.recv(1024).decode()  # Your code starts here # Your code ends here
         filename = message.split()[1]
+        print(filename[1:])
         f = open(filename[1:])
         outputdata = f.read()  # Your code starts here # Your code ends here
 
         # Send one HTTP header line to socket
         # Your code starts here
-        connectionSocket.send('HTTP/1.1 200 OK\r\n'.encode())
+        connectionSocket.send('HTTP/1.1 200 OK\r\n\r\n'.encode())
         # Your code ends here
 
         # Send object to client
