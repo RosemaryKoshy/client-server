@@ -12,8 +12,11 @@ path = input('Object path: ')
 sock.connect((host, port))
 req = f'GET /{path} HTTP/1.1'
 print(req)
-sock.send(req.encode())
+sock.sendall(req.encode())
 
-msg = sock.recv(2048).decode()
+msg = sock.recv(1024).decode()
+while msg:
+    print(msg, end='')
+    msg = sock.recv(1024).decode()
+
 sock.close()
-print(msg)

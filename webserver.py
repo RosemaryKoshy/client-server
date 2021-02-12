@@ -25,8 +25,8 @@ while True:
         # Your code ends here
 
         # Send object to client
-        for line in outputdata:
-            connectionSocket.send(line.encode())
+        for i in range(0, len(outputdata)):
+            connectionSocket.send(outputdata[i].encode())
         connectionSocket.send('\r\n'.encode())
 
         connectionSocket.close()
