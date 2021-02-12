@@ -1,17 +1,21 @@
-# Import socket module
+"""
+TCP Web Client
+Talib Pierson
+Fri Feb 12
+"""
 from socket import *
 
-# Prepare server client
-# SOCK_STREAM for TCP, SOCK_DGRAM for UDP
+# SOCK_STREAM for TCP
 sock = socket(AF_INET, SOCK_STREAM)
 
 host = input('Server IP address: ')
 port = int(input('Server port: '))
 path = input('Object path: ')
 
+# Establish connection
 sock.connect((host, port))
 req = f'GET /{path} HTTP/1.1'
-sock.sendall(req.encode())
+sock.send(req.encode())
 
 msg = sock.recv(1024).decode()
 while msg:

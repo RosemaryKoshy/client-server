@@ -16,7 +16,8 @@ while True:
     message = message.upper()
     # Error simulator goes here
     # Your code starts here
-
+    if bool(random.getrandbits(1)):
+        continue
     # Your code ends here
     # If no error, server responds
     serverSocket.sendto(message, address)

@@ -1,44 +1,41 @@
-# Import socket module
+"""
+TCP Web Server
+Talib Pierson
+Fri Feb 12
+"""
 from socket import *
 
-# Prepare server socket
-# SOCK_STREAM for TCP, SOCK_DGRAM for UDP
-serverSocket = socket(AF_INET, SOCK_STREAM)
-# Your code starts here
-serverSocket.bind(('', 42069))
-serverSocket.listen()
-# Your code ends here
+# SOCK_STREAM for TCP
+sock = socket(AF_INET, SOCK_STREAM)
+
+sock.bind(('', 42069))
+sock.listen()
+
 while True:
     # Establish connection
     print('listening: ', end='')
-    connectionSocket, addr = serverSocket.accept()  # Your code starts here # Your code ends here
+    connection, _ = sock.accept()
     try:
-        message = connectionSocket.recv(1024).decode()  # Your code starts here # Your code ends here
-        filename = message.split()[1]
-        print(filename[1:])
-        f = open(filename[1:])
-        outputdata = f.read()  # Your code starts here # Your code ends here
+        msg = connection.recv(1024).decode()
+        file = msg.split()[1][1:]
+        print(file)
+        f = open(file)
+        data = f.read()
 
         # Send one HTTP header line to socket
-        # Your code starts here
-        connectionSocket.send('HTTP/1.1 200 OK\r\n\r\n'.encode())
-        # Your code ends here
+        connection.send('HTTP/1.1 200 OK\r\n\r\n'.encode())
 
         # Send object to client
-        for i in range(0, len(outputdata)):
-            connectionSocket.send(outputdata[i].encode())
-        connectionSocket.send('\r\n'.encode())
+        for i in range(0, len(data)):
+            connection.send(data[i].encode())
+        connection.send('\r\n'.encode())
 
-        connectionSocket.close()
+        connection.close()
     except IOError:
         # Send 404 message
-        # Your code starts here
-        connectionSocket.send('HTTP/1.1 404 Not Found\r\n\r\n'.encode())
-        # Your code ends here
+        connection.send('HTTP/1.1 404 Not Found\r\n\r\n'.encode())
 
         # Close client socket
-        # Your code starts here
-        connectionSocket.close()
-        # Your code ends here
+        connection.close()
 
-serverSocket.close()
+sock.close()
