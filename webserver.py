@@ -3,12 +3,14 @@ TCP Web Server
 Talib Pierson
 Fri Feb 12
 """
+import atexit
 import socket as s
 
 # SOCK_STREAM for TCP
 SOCK = s.socket(s.AF_INET, s.SOCK_STREAM)
 SOCK.bind(('', 42069))
 SOCK.listen()
+atexit.register(SOCK.close)
 
 while True:
     # Establish connection
@@ -36,5 +38,3 @@ while True:
 
         # Close client socket
         connection.close()
-
-SOCK.close()
