@@ -4,10 +4,10 @@ Talib Pierson
 Fri Feb 12
 """
 import time
-from socket import *
+import socket as s
 
 # SOCK_DGRAM for UDP
-SOCK = socket(AF_INET, SOCK_DGRAM)
+SOCK = s.socket(s.AF_INET, s.SOCK_DGRAM)
 HOST = input('Enter host: ')
 PORT = int(input('Enter port: '))
 SOCK.connect((HOST, PORT))

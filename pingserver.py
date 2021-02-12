@@ -4,10 +4,10 @@ Talib Pierson
 Fri Feb 12
 """
 import random
-from socket import *
+import socket as s
 
 # SOCK_DGRAM for UDP
-SOCK = socket(AF_INET, SOCK_DGRAM)
+SOCK = s.socket(s.AF_INET, s.SOCK_DGRAM)
 # Assign IP address and port number to socket
 SOCK.bind(('', 12000))
 

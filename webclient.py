@@ -3,10 +3,10 @@ TCP Web Client
 Talib Pierson
 Fri Feb 12
 """
-from socket import *
+import socket as s
 
 # SOCK_STREAM for TCP
-SOCK = socket(AF_INET, SOCK_STREAM)
+SOCK = s.socket(s.AF_INET, s.SOCK_STREAM)
 HOST = input('Enter host: ')
 POST = int(input('Enter port: '))
 PATH = input('Enter path: ')
