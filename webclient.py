@@ -11,7 +11,6 @@ path = input('Object path: ')
 
 sock.connect((host, port))
 req = f'GET /{path} HTTP/1.1'
-print(req)
 sock.sendall(req.encode())
 
 msg = sock.recv(1024).decode()

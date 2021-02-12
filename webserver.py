@@ -10,7 +10,7 @@ serverSocket.listen()
 # Your code ends here
 while True:
     # Establish connection
-    print('Server listening...')
+    print('/', end='')
     connectionSocket, addr = serverSocket.accept()  # Your code starts here # Your code ends here
     try:
         message = connectionSocket.recv(1024).decode()  # Your code starts here # Your code ends here
