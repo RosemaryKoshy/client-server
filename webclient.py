@@ -6,23 +6,20 @@ Fri Feb 12
 from socket import *
 
 # SOCK_STREAM for TCP
-sock = socket(AF_INET, SOCK_STREAM)
+SOCK = socket(AF_INET, SOCK_STREAM)
+HOST = input('Enter host: ')
+POST = int(input('Enter port: '))
+PATH = input('Enter path: ')
+SOCK.connect((HOST, POST))
 
-host = input('Server IP address: ')
-port = int(input('Server port: '))
-path = input('Object path: ')
-
-# Establish connection
-sock.connect((host, port))
-# Formulate HTTP get request
-req = f'GET /{path} HTTP/1.1'
-# Send request to server
-sock.send(req.encode())
+# Send HTTP get request to host
+REQ = f'GET /{PATH} HTTP/1.1'
+SOCK.send(REQ.encode())
 
 # Receive and output data
-msg = sock.recv(1024).decode()
+msg = SOCK.recv(1024).decode()
 while msg:
     print(msg, end='')
-    msg = sock.recv(1024).decode()
+    msg = SOCK.recv(1024).decode()
 
-sock.close()
+SOCK.close()

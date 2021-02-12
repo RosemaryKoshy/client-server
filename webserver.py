@@ -6,15 +6,14 @@ Fri Feb 12
 from socket import *
 
 # SOCK_STREAM for TCP
-sock = socket(AF_INET, SOCK_STREAM)
-
-sock.bind(('', 42069))
-sock.listen()
+SOCK = socket(AF_INET, SOCK_STREAM)
+SOCK.bind(('', 42069))
+SOCK.listen()
 
 while True:
     # Establish connection
     print('listening: ', end='')
-    connection, _ = sock.accept()
+    connection, _ = SOCK.accept()
     try:
         msg = connection.recv(1024).decode()
         file = msg.split()[1][1:]
@@ -38,4 +37,4 @@ while True:
         # Close client socket
         connection.close()
 
-sock.close()
+SOCK.close()
