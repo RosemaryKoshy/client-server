@@ -3,26 +3,21 @@ UDP Ping Server
 Talib Pierson
 Fri Feb 12
 """
-# Using random to simulate packet loss
 import random
-# Import socket module
 from socket import *
 
-# SOCK_STREAM for TCP, SOCK_DGRAM for UDP
-serverSocket = socket(AF_INET, SOCK_DGRAM)
+# SOCK_DGRAM for UDP
+sock = socket(AF_INET, SOCK_DGRAM)
 # Assign IP address and port number to socket
-serverSocket.bind(('', 12000))
+sock.bind(('', 12000))
 
 while True:
     # Receive client packet and arrival address
-    message, address = serverSocket.recvfrom(1024)
+    msg, addr = sock.recvfrom(1024)
     # Capitalize the message
-    message = message.upper()
-    # Error simulator goes here
-    # Your code starts here
-    if bool(random.getrandbits(1)):
-        continue
-    # Your code ends here
-    # If no error, server responds
-    serverSocket.sendto(message, address)
+    msg = msg.upper()
 
+    # Error simulator, 95% success rate
+    if random.random() < 0.95:
+        # Respond
+        sock.sendto(msg, addr)
